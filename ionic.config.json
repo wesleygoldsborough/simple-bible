@@ -1,0 +1,7 @@
+{
+  "name": "theBibleApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
