@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Select Book</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="modalController.dismiss()">Close</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list lines="full">
+    <div
+      *ngFor="let book of bibleBooks"
+      [class.active-book]="activeBookID === book.id"
+    >
+      <ion-item (click)="selectBook(book.id, $event)">{{book.label}}</ion-item>
+      <div *ngIf="activeBookID === book.id" class="chapter-numbers">
+        <ng-template [ngIf]="state?.currentBible[book.id].length > 1">
+          <div
+            class="chapter-number-wrapper"
+            *ngFor="let chapter of state?.currentBible[book.id]; index as i;"
+          >
+            <div class="chapter-number ion-activatable ripple-parent" (click)="selectBookAndChapter(book.id, i+1)">
+              {{i+1}}<ion-ripple-effect></ion-ripple-effect>
+            </div>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar class="max-width-600 center-content">
+    <ion-title>{{state?.currentChapter?.data?.reference}}</ion-title>
+    <ion-buttons slot="end" (click)="showSelectBookModal()">
+      <ion-button>
+        <ion-icon slot="icon-only" name="book-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true" #ionContent>
+
+  <ion-header collapse="condense">
+    <ion-toolbar class="no-border">
+      <ng-template [ngIf]="state?.currentChapter?.data?.content && currentChapterLoaded">
+        <ion-title size="large">{{state?.currentChapter?.data?.reference}}</ion-title>
+      </ng-template>
+      <ng-template [ngIf]="!state?.currentChapter?.data?.content || !currentChapterLoaded">
+        <ion-skeleton-text
+          animated
+          style="margin-left: 11px; width: 50%; height: 30px"
+        ></ion-skeleton-text>
+      </ng-template>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="verse-content max-width-600 center-content">
+    <!-- START SKELETON CONTENT -->
+    <ng-template [ngIf]="!state?.currentChapter?.data?.content || !currentChapterLoaded">
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      <br />
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      <br />
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      <br />
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      <br />
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      <br />
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      <br />
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      <br />
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      <br />
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+    </ng-template>
+    <!-- END SKELETON CONTENT -->
+
+    <ng-template [ngIf]="state?.currentChapter?.data?.content && currentChapterLoaded">
+      <div class="scripture-styles" [innerHTML]="state?.currentChapter?.data?.content | safeHtml"></div>
+    </ng-template>
+  </div>
+
+  <ng-template [ngIf]="state?.currentChapter?.data?.content && currentChapterLoaded">
+    <ion-grid class="max-width-600 center-content">
+      <ion-row>
+        <ion-col [class.hide]="state.currentChapter.data.bookId === 'GEN' && state.currentChapter.data.number === '1'">
+          <ion-button expand="block" fill="outline" (click)="getPrevChapter()"
+            >Prev<ion-icon slot="start" name="chevron-back"></ion-icon
+          ></ion-button>
+        </ion-col>
+        <ion-col [class.hide]="state.currentChapter.data.bookId === 'REV' && state.currentChapter.data.number === '22'">
+          <ion-button expand="block" fill="outline" (click)="getNextChapter()"
+            >Next<ion-icon slot="end" name="chevron-forward"></ion-icon
+          ></ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-template>
+</ion-content>

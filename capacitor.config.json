@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.starter",
-  "appName": "theBibleApp",
+  "appName": "SimpleBible",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
